@@ -1,6 +1,6 @@
 Implementing Haskell's do notation in TypeScript using generators
 
-See `main.ts` for example with `Maybe<T>` monad
+See `main-*.ts` files for examples with `Maybe<T>` and `Promise<T>`
 
 #
 
