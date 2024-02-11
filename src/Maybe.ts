@@ -37,15 +37,7 @@ export const Maybe: Monad1<'Maybe'> = {
     },
 
     ap(fab, fa) {
-        if (fab.type === 'nothing') {
-            return fab
-        }
-
-        if (fa.type === 'nothing') {
-            return fa
-        }
-
-        return Maybe.of(fab.value(fa.value))
+        return Maybe.chain(fab, f => Maybe.map(fa, f))
     },
 }
 
