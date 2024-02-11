@@ -1,5 +1,5 @@
 import { Maybe } from './Maybe'
-import { assign, yieldNotation } from './yieldNotation'
+import { yieldNotation } from './yieldNotation'
 
 function main() {
     console.log('abc', compute('abc'))
@@ -7,7 +7,10 @@ function main() {
     console.log('4', compute('4'))
 }
 
-const compute = yieldNotation(function* (input: string) {
+const compute = yieldNotation(Maybe)(function* (
+    assign, 
+    input: string
+) {
     const x = yield* assign(parseNumber(input))
     const y = yield* assign(sqrt(x))
 
@@ -18,14 +21,14 @@ function parseNumber(s: string): Maybe<number> {
     const n = Number(s)
 
     if (Number.isFinite(n)) {
-        return Maybe.just(n)
+        return Maybe.of(n)
     }
 
     return { type: 'nothing' }
 }
 
 function sqrt(n: number): Maybe<number> {
-    return n < 0 ? { type: 'nothing' } : Maybe.just(Math.sqrt(n))
+    return n < 0 ? { type: 'nothing' } : Maybe.of(Math.sqrt(n))
 }
 
 main()

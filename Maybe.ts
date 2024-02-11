@@ -1,3 +1,6 @@
+import { Monad1 } from 'fp-ts/lib/Monad'
+import { } from 'fp-ts/Option'
+
 export type Maybe<T> = {
     type: 'nothing'
 } | {
@@ -5,19 +8,45 @@ export type Maybe<T> = {
     value: T
 }
 
-export namespace Maybe {
-    export function just<T>(value: T): Maybe<T> {
-        return {
-            type: 'something',
-            value
-        }
-    }
-
-    export function flatMap<T, R>(m: Maybe<T>, fn: (value: T) => Maybe<R>): Maybe<R> {
-        if (m.type === 'nothing') {
-            return m
-        }
-
-        return fn(m.value)
+declare module 'fp-ts/HKT' {
+    export interface URItoKind<A> {
+        Maybe: Maybe<A>
     }
 }
+
+export const Maybe: Monad1<'Maybe'> = {
+    URI: 'Maybe',
+
+    of(a) {
+        return {
+            type: 'something',
+            value: a
+        }
+    },
+
+    chain(fa, f) {
+        if (fa.type === 'nothing') {
+            return fa
+        }
+
+        return f(fa.value)
+    },
+
+    map(fa, f) {
+        return Maybe.chain(fa, a => Maybe.of(f(a)))
+    },
+
+    ap(fab, fa) {
+        if (fab.type === 'nothing') {
+            return fab
+        }
+
+        if (fa.type === 'nothing') {
+            return fa
+        }
+
+        return Maybe.of(fab.value(fa.value))
+    },
+}
+
+export const Nothing: Maybe<never> = { type: 'nothing' }
