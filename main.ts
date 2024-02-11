@@ -1,7 +1,7 @@
 import { Maybe } from './Maybe'
-import { assign, doNotation } from './doNotation'
+import { assign, yieldNotation } from './yieldNotation'
 
-const main = doNotation(function* (input: string) {
+const main = yieldNotation(function* (input: string) {
     const x = yield* assign(parseNumber(input))
     const y = yield* assign(sqrt(x))
     

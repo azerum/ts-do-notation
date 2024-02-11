@@ -7,7 +7,7 @@ export function* assign<T>(m: Maybe<T>): Generator<Maybe<T>, T, T> {
 
 type MaybeGenerator<T> = Generator<Maybe<unknown>, T, unknown>
 
-export function doNotation<Args extends unknown[], T>(
+export function yieldNotation<Args extends unknown[], T>(
     fn: (...args: Args) => MaybeGenerator<T>
 ): (...args: Args) => Maybe<T> {
     return (...args) => {
