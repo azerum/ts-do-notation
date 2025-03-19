@@ -1,5 +1,5 @@
 import * as option from 'fp-ts/Option'
-import { doNotation } from './doNotation'
+import { doNotation } from './doNotation.js'
 
 const numbers = [-2, -1, 0, 1, 2]
 

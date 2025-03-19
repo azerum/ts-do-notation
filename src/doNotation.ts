@@ -1,11 +1,11 @@
 import { Kind, URIS } from 'fp-ts/HKT'
-import { Monad1 } from 'fp-ts/lib/Monad.js'
+import * as monad from 'fp-ts/Monad'
 
 export type DoNotationGenerator<F extends URIS, TResult> = 
     Generator<Kind<F, any>, TResult, any> 
 
 export function doNotation<F extends URIS, TResult>(
-    monad: Monad1<F>,
+    monad: monad.Monad1<F>,
     body: (assign: AssignFn<F>) => DoNotationGenerator<F, TResult>
 ): Kind<F, TResult> {
     const assign = assignForTypeConstructor<F>()

@@ -1,4 +1,4 @@
-import { Monad1 } from 'fp-ts/lib/Monad'
+import * as monad from 'fp-ts/Monad'
 
 declare module 'fp-ts/HKT' {
     export interface URItoKind<A> {
@@ -12,7 +12,7 @@ declare module 'fp-ts/HKT' {
  *
  * See https://buzzdecafe.github.io/2018/04/10/no-promises-are-not-monads
  */
-export const PromiseMonad: Monad1<'Promise'> = {
+export const PromiseMonad: monad.Monad1<'Promise'> = {
     URI: 'Promise',
 
     async of(a) {

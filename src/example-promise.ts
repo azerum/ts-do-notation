@@ -1,5 +1,5 @@
-import { doNotation } from './doNotation'
-import { PromiseMonad } from './PromiseMonad'
+import { doNotation } from './doNotation.js'
+import { PromiseMonad } from './PromiseMonad.js'
 
 void main()
 
